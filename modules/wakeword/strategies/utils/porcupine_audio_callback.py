@@ -28,3 +28,4 @@ class PorcupineAudioCallback:
             print("wake word detected")
             audio_capture.stop_capture()
             self.action_callback()
+            audio_capture.start_capture()

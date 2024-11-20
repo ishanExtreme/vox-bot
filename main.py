@@ -1,23 +1,20 @@
+from config import CUSTOM_MODEL_PATH, ACCESS_KEY
 from modules.wakeword import SoundDeviceCapture
 from modules.wakeword import PorcupineWakeWordDetection
 from modules.wakeword.strategies.utils.porcupine_audio_callback import (
     PorcupineAudioCallback,
 )
 from modules.wakeword.wakeword_detector import WakeWordDetector
-
-custom_model_path = "Hey-vox/Hey-vox.ppn"
-access_key = "IDNKisYX0LHFNlmcYsLMAq/CIWpvtwB2pej066atlK9RLCDCiOz4QQ=="
+from action_plan import ActionPlan
 
 porcupine_wake_word_detection = PorcupineWakeWordDetection(
-    access_key=access_key, keyword_paths=[custom_model_path]
+    access_key=ACCESS_KEY, keyword_paths=[CUSTOM_MODEL_PATH]
 )
 
-
-def action_callback():
-    print("action callback called")
-
-
-callback = PorcupineAudioCallback(porcupine_wake_word_detection, action_callback)
+action_callback = ActionPlan()
+callback = PorcupineAudioCallback(
+    porcupine_wake_word_detection, action_callback=action_callback
+)
 audio_capture = SoundDeviceCapture(
     sample_rate=porcupine_wake_word_detection.porcupine.sample_rate,
     block_size=porcupine_wake_word_detection.porcupine.frame_length,

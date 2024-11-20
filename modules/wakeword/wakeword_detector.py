@@ -16,7 +16,7 @@ class WakeWordDetector:
         self.audio_capture_strategy.start_capture()
 
         try:
-            while self.audio_capture_strategy.stream is not None:
+            while True:
                 pass
         except KeyboardInterrupt:
             print("Listening stopped")
