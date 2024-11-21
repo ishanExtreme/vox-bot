@@ -21,3 +21,8 @@ def play_mp3_in_background(file_path):
     thread.start()
 
     return thread
+
+
+def play_mp3_blocking(file_path):
+
+    playsound(file_path)

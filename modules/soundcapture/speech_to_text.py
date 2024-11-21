@@ -11,8 +11,12 @@ client = OpenAI(api_key=OPENAI_KEY)
 def openai_speech_to_text(audio_data):
     file_name = f"{str(uuid4())}.wav"
     named_audio_file = NamedBytesIO(audio_data, name=file_name)
-    transcription = client.audio.transcriptions.create(
-        model="whisper-1", file=named_audio_file, language="en"
-    )
+    try:
+        transcription = client.audio.transcriptions.create(
+            model="whisper-1", file=named_audio_file, language="en"
+        )
 
-    return transcription.text
+        return transcription.text
+    except Exception as e:
+        print(e)
+        return ""

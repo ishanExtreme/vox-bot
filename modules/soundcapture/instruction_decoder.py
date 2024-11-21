@@ -7,7 +7,6 @@ import numpy as np
 import sounddevice as sd
 import webrtcvad
 
-from config import ROOT_DIR
 from modules.soundcapture.speech_to_text import openai_speech_to_text
 
 
@@ -32,19 +31,22 @@ class InstructionDecoder:
         self.vad.set_mode(3)
         self.frame_size = int(self.sample_rate * 0.02)  # lets take 20 ms frames
 
+        # waits extra time when no first word is spoken (in seconds)
+        self.spare_time = 10
+
     def __is_speech(self, frame: bytes) -> bool:
         return self.vad.is_speech(frame, self.sample_rate)
 
     def listen_and_get_instructions(self):
         start_time = time.time()
-        last_active_time = start_time
+        last_active_time = start_time + self.spare_time
         max_duration_seconds = self.max_duration * 60
 
         recorded_frames: List[np.ndarray] = []
         audio_buffer = np.zeros((0,), dtype=np.int16)
 
         def audio_callback(indata: np.ndarray, frames, stream_time, status):
-            # using recorded_frames of parent function
+            # using variables of parent function(since they are reassigned)
             nonlocal last_active_time
             nonlocal audio_buffer
 
@@ -77,7 +79,7 @@ class InstructionDecoder:
                     break
 
                 # prevents high cpu usage
-                time.sleep(0.03)
+                time.sleep(0.1)
 
             audio_data = b"".join(chunk.tobytes() for chunk in recorded_frames)
 
@@ -89,17 +91,5 @@ class InstructionDecoder:
                 wav_file.setframerate(self.sample_rate)
                 wav_file.writeframes(audio_data)
 
-            # Save the WAV buffer to a file
-            output_file_path = ROOT_DIR / "output_audio.wav"
-            with open(output_file_path, "wb") as output_file:
-                output_file.write(
-                    wav_buffer.getvalue()
-                )  # Write the buffer's content to the file
-
-            print(f"WAV file saved to: {output_file_path}")
-
-            # Convert the in-memory WAV buffer to raw bytes for further processing
             wav_bytes = wav_buffer.getvalue()
-
-            # Pass the WAV byte data or buffer to OpenAI's speech-to-text function
             return openai_speech_to_text(wav_bytes)

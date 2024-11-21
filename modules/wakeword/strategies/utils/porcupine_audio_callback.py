@@ -5,7 +5,7 @@ import numpy as np
 from config import NOTIFICATION_SOUND_PATH
 from modules.wakeword.strategies.wakeword import WakeWordDetectStrategy
 from modules.wakeword.strategies.audio_capture import AudioCaptureStrategy
-from tools.play_sound import play_mp3_in_background
+from tools.play_sound import play_mp3_blocking
 
 
 class PorcupineAudioCallback:
@@ -28,7 +28,7 @@ class PorcupineAudioCallback:
 
         if self.wake_word_detector.detect_wake_word(pcm):
             print("wake word detected")
-            play_mp3_in_background(NOTIFICATION_SOUND_PATH)
             audio_capture.stop_capture()
+            play_mp3_blocking(NOTIFICATION_SOUND_PATH)
             self.action_callback()
             audio_capture.start_capture()
