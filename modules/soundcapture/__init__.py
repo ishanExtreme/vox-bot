@@ -1,0 +1,1 @@
+from modules.soundcapture.instruction_decoder import InstructionDecoder

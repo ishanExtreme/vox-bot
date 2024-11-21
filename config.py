@@ -1,5 +1,12 @@
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve(strict=True).parent
+
+
 INITIATING_VOICE_PATH = "static/voices/initiating.mp3"
 NOTIFICATION_SOUND_PATH = "static/voices/notification.mp3"
 
 CUSTOM_MODEL_PATH = "Hey-vox/Hey-vox.ppn"
 ACCESS_KEY = "IDNKisYX0LHFNlmcYsLMAq/CIWpvtwB2pej066atlK9RLCDCiOz4QQ=="
+
+OPENAI_KEY = "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"

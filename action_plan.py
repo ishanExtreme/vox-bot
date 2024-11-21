@@ -1,12 +1,11 @@
 import time
-
-from tools.play_sound import play_mp3_in_background
-from config import INITIATING_VOICE_PATH
+from modules.soundcapture import InstructionDecoder
 
 
 class ActionPlan:
 
     def __call__(self):
-        print("Starting action")
-        time.sleep(10)
-        print("Action done")
+        instruction_decoder = InstructionDecoder()
+        instructions = instruction_decoder.listen_and_get_instructions()
+
+        print(instructions)
