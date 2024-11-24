@@ -26,3 +26,10 @@ os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
 os.environ["LANGCHAIN_PROJECT"] = "vox"
 os.environ["LANGCHAIN_API_KEY"] = "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"
+
+## Omniparser
+ICONDETECT_WEIGHTS_PATH = str(ROOT_DIR/"static/weights/icon_detect/best.pt")
+FLORENCE_WEIGHT_PATH = str(ROOT_DIR/"static/weights/icon_caption_florence")
+BOX_TRESHOLD=0.05
+
+SCREENSHOT_PATH = str(ROOT_DIR / "static/screenshots")
