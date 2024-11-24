@@ -1,34 +1,61 @@
 from typing import Literal
+from typing_extensions import Annotated
+
 
 from langchain.tools import tool
+from langgraph.prebuilt import InjectedState
+
+from modules.brain.langgraph_config.utils.executing_tools_helper import (
+    move_mouse_to_id_helper,
+    click_mouse_button_helper,
+    type_using_keyboard_helper,
+    press_hotkeys_or_enter_helper,
+)
+
 
 @tool("move_mouse_to_id")
-def move_mouse_to_id(bounding_box_id:int) -> str:
-  """Move the mouse pointer at the center of given id of bounding box"""
+def move_mouse_to_id(
+    bounding_box_id: int, state: Annotated[dict, InjectedState]
+) -> str:
+    """Move the mouse pointer at the center of given id of bounding box"""
 
-  print(f"Moved to {bounding_box_id}")
-  return f"Moved to {bounding_box_id}"
+    move_mouse_to_id_helper(bounding_box_id, state["bounding_box_hash"])
+    return f"Moved to {bounding_box_id}"
+
 
 @tool("click_mouse_button")
-def click_mouse_button(button_type: Literal["left_click", "right_click"]) -> str:
-  """Click the mouse button based on button_type given either left_click or right_click"""
+def click_mouse_button(
+    button_type: Literal["left_click", "right_click", "double_click"]
+) -> str:
+    """Click the mouse button based on button_type given either left_click, right_click or double_click"""
 
-  print(f"Mouse pressed: {button_type}")
-  return f"Mouse pressed: {button_type}"
+    click_mouse_button_helper(button_type=button_type)
+    return f"Mouse pressed: {button_type}"
+
 
 @tool("type_using_keyboard")
 def type_using_keyboard(sentence: str) -> str:
-  """Type the sentence given using keyboard"""
+    """Type the sentence given using keyboard"""
 
-  print(f"Typed: {sentence}")
-  return f"Typed: {sentence}"
+    type_using_keyboard_helper(sentence=sentence)
+    return f"Typed: {sentence}"
 
-@tool("press_keyboard_shortcut")
-def press_keyboard_shortcut(keyboard_shortcut: str) -> str:
-  """Press the keyboard shortcut using pyautogui, example keyboard_shortcut='ctrl+s'"""
 
-  print(f"Keyboard shortcut pressed: {keyboard_shortcut}")
-  return f"Keyboard shortcut pressed: {keyboard_shortcut}"
+@tool("press_hotkeys_or_enter")
+def press_hotkeys_or_enter(hotkeys: str) -> str:
+    """Press the keyboard hotkeys using pyautogui, example hotkeys='ctrl+s' or press enter using hotkeys='enter'"""
+
+    press_hotkeys_or_enter_helper(hotkeys=hotkeys)
+    return f"Keyboard shortcut pressed: {hotkeys}"
+
+
+## TODO create scroll function
+
 
 def get_all_execution_tools():
-  return[move_mouse_to_id, click_mouse_button, type_using_keyboard, press_keyboard_shortcut]
+    return [
+        move_mouse_to_id,
+        click_mouse_button,
+        type_using_keyboard,
+        press_hotkeys_or_enter,
+    ]
