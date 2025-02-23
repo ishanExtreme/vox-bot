@@ -28,6 +28,7 @@ class RunOmniparser(FileSystemEventHandler):
                         data.get("file_path_base_64"),
                         data.get("return_list"),
                         data.get("simplified_return_list"),
+                        data.get("file_path"),
                     )
                     self.found = True
 

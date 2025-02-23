@@ -20,7 +20,7 @@ def move_mouse_to_id(
     """Move the mouse pointer at the center of given id of bounding box"""
 
     move_mouse_to_id_helper(bounding_box_id, state["bounding_box_hash"])
-    return f"Moved to {bounding_box_id}"
+    return f"Moved mouse to {bounding_box_id} -> Done"
 
 
 @tool("click_mouse_button")
@@ -30,7 +30,7 @@ def click_mouse_button(
     """Click the mouse button based on button_type given either left_click, right_click or double_click"""
 
     click_mouse_button_helper(button_type=button_type)
-    return f"Mouse pressed: {button_type}"
+    return f"Mouse key pressed: {button_type} -> Done"
 
 
 @tool("type_using_keyboard")
@@ -38,7 +38,7 @@ def type_using_keyboard(sentence: str) -> str:
     """Type the sentence given using keyboard"""
 
     type_using_keyboard_helper(sentence=sentence)
-    return f"Typed: {sentence}"
+    return f"Typed: {sentence} -> Done"
 
 
 @tool("press_hotkeys_or_enter")
@@ -46,7 +46,7 @@ def press_hotkeys_or_enter(hotkeys: str) -> str:
     """Press the keyboard hotkeys using pyautogui, example hotkeys='ctrl+s' or press enter using hotkeys='enter'"""
 
     press_hotkeys_or_enter_helper(hotkeys=hotkeys)
-    return f"Keyboard shortcut pressed: {hotkeys}"
+    return f"Keyboard shortcut pressed: {hotkeys} -> Done"
 
 
 ## TODO create scroll function

@@ -35,9 +35,12 @@ def initialize_models():
             model_name_or_path=FLORENCE_WEIGHT_PATH,
             device=device,
         )
+
+
 initialize_models()
 
-def get_screenshot_with_bounding_box(screenshot_path:str):
+
+def get_screenshot_with_bounding_box(screenshot_path: str):
 
     start = time.time()
     image = Image.open(screenshot_path)
@@ -78,7 +81,12 @@ def get_screenshot_with_bounding_box(screenshot_path:str):
     return_list = [
         {
             "id": i,
-            "shape": {"x": coord[0], "y": coord[1], "width": coord[2], "height": coord[3]},
+            "shape": {
+                "x": coord[0],
+                "y": coord[1],
+                "width": coord[2],
+                "height": coord[3],
+            },
             "text": parsed_content_list[i].split(": ")[1],
             "type": "text",
         }
@@ -103,12 +111,10 @@ def get_screenshot_with_bounding_box(screenshot_path:str):
         ]
     )
 
-    simplified_return_list = [{"id": obj["id"], "text": obj["text"], "type": obj["type"]} for obj in return_list]
+    simplified_return_list = [{obj["id"]: obj["text"]} for obj in return_list]
 
-    print("saving bb file")
     file_path = screenshot_path.replace(".png", "_processed.png")
     image.save(file_path)
-    print("saved bb file")
 
     buffer = io.BytesIO()
     image.save(buffer, format="JPEG")
@@ -117,4 +123,4 @@ def get_screenshot_with_bounding_box(screenshot_path:str):
     file_path_base_64 = f"data:image/jpeg;base64,{image_base64}"
 
     print(f"Time taken by omniparser = {time.time() - start}")
-    return file_path_base_64, return_list, simplified_return_list
+    return file_path_base_64, return_list, simplified_return_list, screenshot_path

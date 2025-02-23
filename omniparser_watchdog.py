@@ -17,13 +17,14 @@ class RunOmniparser(FileSystemEventHandler):
                 while screenshot_path == "":
                     screenshot_path = file.readline().strip()
                 print(f"processing screenshot {screenshot_path}")
-                file_path_base_64, return_list, simplified_return_list = (
+                file_path_base_64, return_list, simplified_return_list, file_path = (
                     get_screenshot_with_bounding_box(screenshot_path)
                 )
                 data = {
                     "file_path_base_64": file_path_base_64,
                     "return_list": return_list,
                     "simplified_return_list": simplified_return_list,
+                    "file_path": file_path,
                 }
                 extension = screenshot_path.split(".")[1]
                 file_name = screenshot_path.split(".")[0]
