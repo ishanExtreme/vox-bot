@@ -177,9 +177,3 @@ watchdog==6.0.0
 webrtcvad==2.0.10
 websockets==12.0
 yarl==1.18.0
-ech-gen             /home/ishan/miniconda3/envs/speech-gen
-talk_god               /home/ishan/miniconda3/envs/talk_god
-test                   /home/ishan/miniconda3/envs/test
-transcriber            /home/ishan/miniconda3/envs/transcriber
-twin                   /home/ishan/miniconda3/envs/twin
-vox-tes
