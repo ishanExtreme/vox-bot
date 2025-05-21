@@ -137,8 +137,8 @@ MIT License. See `LICENSE` file for details.
 ---
 ## ⭐ Star this Project
 
-If you find this project useful or interesting, please consider giving it a ⭐ on [GitHub](https://github.com/your-username/vox-voice-linux). It helps others discover the project and motivates us to keep improving it!
+If you find this project useful or interesting, please consider giving it a ⭐ on [GitHub](https://github.com/ishanExtreme/vox-bot). It helps others discover the project and motivates us to keep improving it!
 
-[![Star this repo](https://img.shields.io/github/stars/your-username/vox-voice-linux?style=social)](https://github.com/ishanExtreme/vox-bot)
+[![Star this repo](https://img.shields.io/github/stars/ishanExtreme/vox-bot?style=social)](https://github.com/ishanExtreme/vox-bot)
 
 > VOX – Built to make your Linux experience conversational, intelligent, and hands-free.
