@@ -55,9 +55,24 @@ LANGCHAIN_API_KEY=your-langchain-api-key             # Optional, for LangChain t
 
 ### 3. Start Microsoft Omni Parser
 
+- Download the **OmniParser** weights from the official [Hugging Face repository](https://huggingface.co/microsoft/OmniParser).
+- Place the downloaded files in the following directory structure:
+
+```
+static/weights/
+├── icon_caption_blip2/
+├── icon_caption_florence/
+├── icon_detect/
+├── config.json
+└── convert_safetensor_to_pt.py
+```
+
+- Then, start the Omni Parser using:
+
 ```bash
 python omniparser_watchdog.py
 ```
+
 
 ### 4. Start VOX
 

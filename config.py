@@ -39,3 +39,5 @@ FLORENCE_WEIGHT_PATH = str(ROOT_DIR/"static/weights/icon_caption_florence")
 BOX_TRESHOLD=0.05
 
 SCREENSHOT_PATH = str(ROOT_DIR / "static/screenshots")
+os.makedirs(SCREENSHOT_PATH, exist_ok=True)
+
