@@ -174,5 +174,5 @@ cython_debug/
 .pypirc
 
 #### Project specific
-static/screenshots
+static/screenshots/*
 static/weights
