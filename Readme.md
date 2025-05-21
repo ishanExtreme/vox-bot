@@ -102,9 +102,9 @@ This wakes the assistant. Then you can issue commands like:
 
 ---
 
-## 📷 Architecture
+## 📷 Flow Diagram
 
-![VOX System Architecture](./static/architecture/graph.png)
+![VOX System Architecture](./static/architecture/vox_v1.png)
 
 The system follows a **bi-directional LangGraph** architecture with distinct functional nodes, allowing for modular design and improved maintainability.
 
